@@ -1,0 +1,13 @@
+#3.Feature Engineering
+#Create a new column for company financial performance
+df['COMPANY_FINANCIAL_PERFORMANCE']=df['LATEST_YEAR_ANNUAL_RETURN']+' to '+df['LATEST_YEAR_FINANCIAL_STATEMENT']
+df.head()
+
+#Perform one hot encoding
+df_encoded=pd.get_dummies(df,columns=['COMPANY_STATUS'])
+df_encoded.head()
+
+df['AUTHORIZED_CAP']=df['AUTHORIZED_CAP'].astype(int)
+df.head()
+df['PAIDUP_CAPITAL']=df['PAIDUP_CAPITAL'].astype(int)
+df
