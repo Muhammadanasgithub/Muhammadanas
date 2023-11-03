@@ -1,0 +1,14 @@
+#2.Exploratory data analysis 
+#Basic analysis
+df.shape
+df.describe()
+df.columns
+df.nunique()
+df['REGISTRAR_OF_COMPANIES'].unique()
+df['COMPANY_STATUS'].unique()
+
+#Relationship analysis
+correlation=df.corr()
+sns.heatmap(correlation, xticklabels=correlation.columns, yticklabels=correlation.columns, annot=True)
+sns.distplot(df['AUTHORIZED_CAP'], bins=5)
+sns.distplot(df['PAIDUP_CAPITAL'],bins=5)
