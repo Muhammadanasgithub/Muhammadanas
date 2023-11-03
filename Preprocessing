@@ -1,0 +1,12 @@
+#1.Preprocessed data
+#Check for duplicate values
+df.dropna(inplace=True)
+
+#Remove the duplicate values
+df.drop_duplicates(inplace=True)
+
+#Again check the missing values are occur or not
+df.isnull().sum()
+
+#Finally preprocessed data can be done successfully
+df
