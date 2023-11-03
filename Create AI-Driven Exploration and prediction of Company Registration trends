@@ -1,0 +1,62 @@
+#Import the libraries
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+#Load the given dataset
+df=pd.read_csv('D:\Data_Gov_Tamil_Nadu.csv')
+df.head()
+
+#1.Preprocessed data
+#Check for duplicate values
+df.dropna(inplace=True)
+
+#Remove the duplicate values
+df.drop_duplicates(inplace=True)
+
+#Again check the missing values are occur or not
+df.isnull().sum()
+
+#Finally preprocessed data can be done successfully
+df
+
+#2.Exploratory data analysis 
+#Basic analysis
+df.shape
+df.describe()
+df.columns
+df.nunique()
+df['REGISTRAR_OF_COMPANIES'].unique()
+df['COMPANY_STATUS'].unique()
+
+#Relationship analysis
+correlation=df.corr()
+sns.heatmap(correlation, xticklabels=correlation.columns, yticklabels=correlation.columns, annot=True)
+sns.distplot(df['AUTHORIZED_CAP'], bins=5)
+sns.distplot(df['PAIDUP_CAPITAL'],bins=5)
+
+#3.Feature Engineering
+#Create a new column for company financial performance
+df['COMPANY_FINANCIAL_PERFORMANCE']=df['LATEST_YEAR_ANNUAL_RETURN']+' to '+df['LATEST_YEAR_FINANCIAL_STATEMENT']
+df.head()
+
+#Perform one hot encoding
+df_encoded=pd.get_dummies(df,columns=['COMPANY_STATUS'])
+df_encoded.head()
+
+df['AUTHORIZED_CAP']=df['AUTHORIZED_CAP'].astype(int)
+df.head()
+df['PAIDUP_CAPITAL']=df['PAIDUP_CAPITAL'].astype(int)
+df
+
+#Predictive modeling
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+train=df.drop['AUTHORIZED_CAP','CORPORATE_IDENTIFICATION_NUMBER','DATE_OF_REGISTRATION'],axis=1)
+test=df['AUTHORIZED_CAP']
+X_train,X_test,y_train,y_test=train_test_split(train,test,test_size=0.3,random_state=2)
+regr=LinearRegression()
+regr.fit(X_train,y_train)
+pred=regr.predict(X_test)
+pred
